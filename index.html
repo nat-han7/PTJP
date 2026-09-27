@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Psychotherapie Papst - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav-extended">
+            <div class="nav-content">
+                <div class="nav-container">
+                    <a href="/" class="profile" aria-label="Startseite"></a>
+                    
+                    <!-- Hamburger-Button für mobile Geräte -->
+                    <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" onclick="toggleMobileMenu()">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+
+                    <ul class="tabs tabs-transparent" id="navTabs">
+                        <li class="tab active">
+                            <a href="#ueberblick" onclick="closeMobileMenu()">Überblick</a>
+                        </li>
+                        <li class="tab">
+                            <a href="#biografie" onclick="closeMobileMenu()">Biografie</a>
+                        </li>
+                        <li class="tab">
+                            <a href="#leistungen" onclick="closeMobileMenu()">Leistungen</a>
+                        </li>
+                        <li class="tab">
+                            <a href="#ablauf" onclick="closeMobileMenu()">Ablauf</a>
+                        </li>
+                        <li class="tab">
+                            <a href="#kontakt" onclick="closeMobileMenu()">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <section class="hero" id="ueberblick">
+            <h1>Psychotherapie Papst</h1>
+            <p>...</p>
+        </section>
+
+        <section class="panel" id="biografie">
+            <h2>Biografie</h2>
+            <div class="bio-content" id="bio-content">
+            </div>
+            <button class="readmore" id="readmorebtn" onclick="toggleBio()" aria-expanded="false">Mehr lesen</button>
+        </section>
+
+        <section class="panel" id="leistungen">
+            <h2>Leistungen</h2>
+            <ul class="feature-list">
+                <li><span class="icon">✓</span>...</li>
+                <li><span class="icon">✓</span>...</li>
+                <li><span class="icon">✓</span>...</li>
+                <li><span class="icon">✓</span>...</li>
+            </ul>
+        </section>
+
+        <section class="panel" id="ablauf">
+            <h2>Ablauf</h2>
+            <p>...</p>
+        </section>
+
+        <section class="panel" id="kontakt">
+            <h2>Kontakt</h2>
+            <p>Schreibe an <a href="mailto:info@psychotherapie-papst.de" class="text-link">info@psychotherapie-papst.de</a>.</p>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <h2><strong>Julia Papst</strong></h2>
+        <h3>Psychologische Therapeutin</h3>
+        <a href="mailto:juliapapst@psychotherapie-papst.ch">juliapapst@psychotherapie-papst.ch</a>
+        <br>
+        <a href="/impressum">Impressum</a>
+        <br>
+        <p>&copy; All rights reserved</p>
+    </footer>
+
+    <script>
+        // Aktiven Tab in der Navigation markieren
+        (() => {
+            const tabs = Array.from(document.querySelectorAll('.tabs .tab'));
+            const links = tabs.map((tab) => tab.querySelector('a[href^="#"]')).filter(Boolean);
+
+            const setActiveTab = (hash) => {
+                const targetHash = hash || window.location.hash || links[0]?.getAttribute('href') || '';
+
+                tabs.forEach((tab) => {
+                    const link = tab.querySelector('a[href^="#"]');
+                    const isActive = link?.getAttribute('href') === targetHash;
+                    tab.classList.toggle('active', isActive);
+                    if (link) {
+                        if (isActive) {
+                            link.setAttribute('aria-current', 'page');
+                        } else {
+                            link.removeAttribute('aria-current');
+                        }
+                    }
+                });
+            };
+
+            links.forEach((link) => {
+                link.addEventListener('click', () => {
+                    window.requestAnimationFrame(() => {
+                        setActiveTab(window.location.hash);
+                    });
+                });
+            });
+
+            window.addEventListener('hashchange', () => setActiveTab(window.location.hash));
+            setActiveTab(window.location.hash);
+        })();
+
+        // Mobile Menü Steuerung (Hamburger)
+        function toggleMobileMenu() {
+            const navTabs = document.getElementById('navTabs');
+            navTabs.classList.toggle('show');
+        }
+
+        function closeMobileMenu() {
+            const navTabs = document.getElementById('navTabs');
+            navTabs.classList.remove('show');
+        }
+
+        // Biografie Text einfügen
+        const biotext = ` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec magna eu dolor tempus euismod vel et erat. Etiam sit amet pretium ex, eu interdum libero. Curabitur eleifend enim in facilisis luctus. Cras ac risus erat. Donec porttitor purus sit amet turpis sagittis dignissim. In ac tellus eget libero aliquet rhoncus. Praesent a faucibus odio. Mauris vitae nulla leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+Aliquam quis elit elementum, volutpat turpis at, vulputate libero. Nulla ornare feugiat nisi vel maximus. Sed rhoncus libero ut enim mattis volutpat. Suspendisse tincidunt velit in congue molestie. In elementum vulputate purus, et ultrices dui commodo eu. Nullam blandit sollicitudin ultricies. Fusce augue leo, sodales ac dui sed, feugiat convallis libero. Sed in felis vel erat malesuada blandit. Phasellus imperdiet dictum vehicula. Donec tempor et tortor at pulvinar. Pellentesque eget dapibus orci, eu volutpat est. Proin nisl nibh, rutrum eu turpis venenatis, semper auctor enim. Donec egestas arcu ut erat sodales, at lacinia diam varius. Integer auctor massa ex, non condimentum eros euismod vel. Donec eget augue posuere metus lacinia placerat a vitae odio.
+
+Suspendisse pulvinar id lacus at accumsan. Quisque imperdiet eros et placerat viverra. Maecenas finibus aliquam est sed sollicitudin. Maecenas nec arcu vel ante lobortis lacinia. Duis molestie feugiat placerat. Nunc lacus odio, interdum nec urna vel, accumsan tempor nisi. In pharetra dolor accumsan ex dictum sodales. Pellentesque commodo suscipit lorem eu varius. Donec a placerat nisl, non molestie massa. Vivamus facilisis dolor ac enim dictum facilisis. Sed molestie rhoncus erat sit amet tincidunt. Donec et lorem nec nunc convallis mattis eu id arcu. Pellentesque maximus pulvinar enim, ac porttitor purus convallis eu. Suspendisse elementum arcu et diam ornare, ut sagittis augue interdum.`;
+
+        const biocontainer = document.getElementById("bio-content");
+        biocontainer.textContent = biotext;
+
+        // Biografie Ein-/Ausklappen mit sanftem Scroll-Verhalten
+        function toggleBio() {
+            const content = document.getElementById("bio-content");
+            const btn = document.getElementById("readmorebtn");
+            content.classList.toggle("expanded");
+            
+            if (content.classList.contains("expanded")) {
+                btn.textContent = "Weniger anzeigen";
+                btn.setAttribute("aria-expanded", "true");
+            } else {
+                btn.textContent = "Mehr lesen";
+                btn.setAttribute("aria-expanded", "false");
+                document.getElementById("biografie").scrollIntoView({ behavior: 'smooth'});
+            }
+        }
+    </script>
+</body>
+</html>
